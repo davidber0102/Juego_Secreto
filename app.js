@@ -2,8 +2,6 @@ let numeroSecreto = 0;
 let intentos = 0;
 let listaNumeroSorteados = [];
 let numeroMaximo = 10;
-console.log(numeroSecreto);
-
 
 function asignarTextoElemto(elemento, texto) {
     let elementHtml = document.querySelector(elemento);
@@ -13,11 +11,7 @@ function asignarTextoElemto(elemento, texto) {
 
 function verificarIntento(){
     let numeroUsuario = parseInt(document.getElementById("valorUsuario").value);
-    //console.log(typeof(numeroUsuario));
-    //console.log(numeroUsuario);
-    //console.log(typeof(numeroSecreto));
-    console.log(numeroSecreto);
-
+   
     if (numeroUsuario === numeroSecreto){
         asignarTextoElemto('p', `Numero Correcto, Acertase en ${intentos} ${(intentos ===1) ? 'vez': 'veces'}`);
         document.getElementById("reiniciar").removeAttribute("disabled");
@@ -31,16 +25,11 @@ function verificarIntento(){
         intentos++;
         limpiarCaja();
     }
-
-   
-    alert('Click desde la funcion')
-    console.log(intentos)
     return;
 }
 
 function limpiarCaja() {
-    document.querySelector("#valorUsuario").value = '';
-    
+    document.querySelector("#valorUsuario").value = '';    
 }
 
 function generarNumeroSecreto() {
@@ -56,17 +45,18 @@ function generarNumeroSecreto() {
             return generarNumeroSecreto();
         } else{
             listaNumeroSorteados.push(numeroGenerado);
+            return numeroGenerado;
         }
     }
 }
 
 function condicionesIniciales() {
     asignarTextoElemto('h1', 'Juego del numero de secreto');
-    asignarTextoElemto('p',  'Indica un numero del 1 al' + numeroMaximo);
+    asignarTextoElemto('p',  `Indica un número del 1 al ${numeroMaximo}`);
     numeroSecreto = generarNumeroSecreto();
     intentos=1;
+    console.log(numeroSecreto);
 }
-
 
 function reiniciarJuego() {
     //Limpiar caja juego
@@ -76,7 +66,7 @@ function reiniciarJuego() {
     // generar numero aleatorio    
     //Inicialiozar numero de intentos
     // desahibilitar el boton de nuevo juego   
-    document.getElementById("reiniciar").setAttribute("disabled", "true"); 
+    document.querySelector("#reiniciar").setAttribute("disabled", "true"); 
 }
 
 condicionesIniciales();
